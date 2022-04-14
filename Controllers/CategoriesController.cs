@@ -13,6 +13,7 @@ namespace Soosle.Controllers
         {
             _mediator = mediator;
         }
+        [HttpPost]
         public async Task<IActionResult> Create(CreateCategoryCommand request)
         {
             return Created(nameof(Create), await _mediator.Send(request));
