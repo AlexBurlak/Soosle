@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CategoryCreateRequest } from 'src/app/models/requests/category-create-request';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -24,9 +25,16 @@ export class AddComponent implements OnInit, OnDestroy {
     this.subscriptions.complete();
   }
 
+  get f() {
+    return this.form.controls;
+  }
+
   onSubmit() {
-    this.categoryService.add()
+    this.categoryService.add(new CategoryCreateRequest({name: this.f.name.value}))
       .pipe(takeUntil(this.subscriptions))
+      .subscribe(categoryId => {
+
+      })
   }
 
   ngOnInit(): void {

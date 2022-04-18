@@ -7,12 +7,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LayoutComponent } from './layout/layout.component';
+import { TableComponent } from './table/table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
 @NgModule({
   declarations: [
-    AddComponent
+    AddComponent,
+    LayoutComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatInputModule,
     MatButtonModule,
+    MatTableModule,
+    MatIconModule,
     ReactiveFormsModule
   ]
 })

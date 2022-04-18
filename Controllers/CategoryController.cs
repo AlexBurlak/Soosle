@@ -1,4 +1,5 @@
 ﻿using BLL.Features.CategoryFeature.Commands;
+using BLL.Features.CategoryFeature.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +16,16 @@ namespace Soosle.Controllers
         {
             _mediator = mediator;
         }
-        [HttpPost("Create")]
+        [HttpPost("create")]
         public async Task<IActionResult> Create(CreateCategoryCommand request)
         {
             return Created(nameof(Create), await _mediator.Send(request));
+        }
+
+        [HttpGet("get-all")]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await _mediator.Send(new GetAllCategoriesQuery()));
         }
     }
 }

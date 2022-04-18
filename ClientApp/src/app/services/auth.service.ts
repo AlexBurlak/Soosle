@@ -20,6 +20,10 @@ export class AuthService {
     this.url = environment.url + '/Account';
   }
 
+  getToken() : string | null {
+    return localStorage.getItem('token');
+  }
+
   login(login: string, password: string) {
     return this.http.post<any>(this.url + '/login', {login, password})
       .pipe(map((response: LoginResponse) => {
