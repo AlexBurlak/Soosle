@@ -1,0 +1,9 @@
+{
+    "AUTH": {
+        "LOGIN": {
+            "LOGIN": "Login",
+            "PASSWORD": "Password",
+            "LOGIN_BUTTON": "Login"
+        }
+    }
+}

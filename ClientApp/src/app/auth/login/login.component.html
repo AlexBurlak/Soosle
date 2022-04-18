@@ -1,0 +1,25 @@
+<mat-card class="central-login-form">
+    <mat-card-title>{{ 'AUTH.LOGIN.LOGIN' | translate}}</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <p>
+                <mat-form-field appearance="standard">
+                    <mat-label>{{ 'AUTH.LOGIN.LOGIN' | translate}}</mat-label>
+                    <input matInput formControlName="username" placeholder="login...">
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="standard">
+                    <mat-label>{{ 'AUTH.LOGIN.PASSWORD' | translate}}</mat-label>
+                    <input [type]='passwordType' formControlName="password" matInput placeholder="password">
+                    <mat-icon (click)="togglePassword()" matSuffix>remove_red_eye</mat-icon>
+                </mat-form-field>
+            </p>
+            <p>
+                <button mat-raised-button color="primary" [disabled]="loading">
+                    {{ 'AUTH.LOGIN.LOGIN_BUTTON' | translate}}
+                </button>
+            </p>
+        </form>
+    </mat-card-content>
+</mat-card>

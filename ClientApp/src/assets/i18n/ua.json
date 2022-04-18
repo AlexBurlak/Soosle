@@ -1,0 +1,9 @@
+{
+    "AUTH": {
+        "LOGIN": {
+            "LOGIN": "Логін",
+            "PASSWORD": "Пароль",
+            "LOGIN_BUTTON": "Увійти"
+        }
+    }
+}

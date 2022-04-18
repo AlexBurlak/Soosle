@@ -1,19 +1,21 @@
 ﻿using BLL.Features.CategoryFeature.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Soosle.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public CategoriesController(IMediator mediator)
+        public CategoryController(IMediator mediator)
         {
             _mediator = mediator;
         }
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<IActionResult> Create(CreateCategoryCommand request)
         {
             return Created(nameof(Create), await _mediator.Send(request));
