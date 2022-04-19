@@ -1,0 +1,14 @@
+.side-nav {
+    height:100vh;
+    
+    .links {
+        font-size:1.4em;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        a {
+            
+            text-decoration: none;
+        }
+    }
+}

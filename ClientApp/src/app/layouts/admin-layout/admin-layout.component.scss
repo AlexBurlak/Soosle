@@ -1,0 +1,12 @@
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 50%;
+    app-sidenav {
+        width:15%;
+    }
+    .central-view {
+        width: 100%;
+    }
+}

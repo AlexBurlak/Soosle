@@ -14,6 +14,12 @@ export const routes: Routes = [
         loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
     },
     {
+        path: 'images',
+        canActivate: [AuthGuard],
+        component: AdminLayoutComponent,
+        loadChildren: () => import('./images/images.module').then(m => m.ImagesModule)
+    },
+    {
         path: "**",
         redirectTo: 'categories'
     }

@@ -22,12 +22,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { routes } from './app.routes';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { SidenavComponent } from './layouts/sidenav/sidenav.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,6 +48,7 @@ import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
     MatSlideToggleModule,
     MatSelectModule,
     MatOptionModule,
+    MatTabsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en'
     })
