@@ -2,16 +2,18 @@
 
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let element;">{{ element.name }}</td>
+        <td mat-cell *matCellDef="let element;" [ngClass]="'w-75'">
+            <span>{{ element.name }}</span>
+        </td>
     </ng-container>
 
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element;">
-            <button mat-raised-button color="accent">
+        <td mat-cell *matCellDef="let element; let i = index;" [ngClass]="['w-25', 'actions']">
+            <button mat-raised-button color="accent" >
                 <mat-icon>edit</mat-icon>
             </button>
-            <button mat-raised-button color="warn">
+            <button mat-raised-button color="warn" (click)="deleteCategory(element.id)">
                 <mat-icon>delete</mat-icon>
             </button>
         </td>

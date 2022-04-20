@@ -24,6 +24,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { SidenavComponent } from './layouts/sidenav/sidenav.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,10 @@ import { MatTabsModule } from '@angular/material/tabs';
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
+    multi: true
+  }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorInterceptor,
     multi: true
   }],
   bootstrap: [AppComponent]

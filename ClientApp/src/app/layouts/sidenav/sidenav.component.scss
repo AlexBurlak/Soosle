@@ -1,14 +1,26 @@
 .side-nav {
     height:100vh;
-    
+    border-right: 2px solid rgba(211,211,211,0.6);
     .links {
         font-size:1.4em;
         text-align: center;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         a {
-            
+            text-transform: uppercase;
+            font-size: 18px;
             text-decoration: none;
+            font-family: sans-serif;
+            font-weight: 500;
+            color:#2ecc71;
+            padding:10px;
+            transition: 0.15s ease-out background-color;
+            &:hover {
+                color:#fff;
+                background-color:#2ecc71;
+            }
+            cursor: pointer;
         }
     }
 }

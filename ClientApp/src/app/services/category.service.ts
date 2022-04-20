@@ -21,4 +21,8 @@ export class CategoryService {
   public getAll() {
     return this.http.get<Category[]>(this.url + '/get-all');
   }
+
+  public delete(id: string) {
+    return this.http.delete<any>(this.url + '/delete', { body: {id: id} });
+  }
 }

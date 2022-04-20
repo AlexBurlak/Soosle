@@ -2,12 +2,14 @@ using BLL.Context;
 using BLL.Features.CategoryFeature.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
 
 var myCors = "_mySpecificCors";
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +52,12 @@ builder.Services.AddMediatR(typeof(CreateCategoryCommand).GetTypeInfo().Assembly
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var path = Path.Combine(Environment.CurrentDirectory, builder.Configuration["ImageFolder"]);
+if (!Directory.Exists(path))
+{
+    Directory.CreateDirectory(path);
+}
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -60,6 +68,14 @@ if (!app.Environment.IsDevelopment())
 app.UseSwagger();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseExceptionHandler(c => c.Run(async context =>
+{
+    var exception = context.Features
+        .Get<IExceptionHandlerPathFeature>()
+        .Error;
+    var response = new { error = exception.Message };
+    await context.Response.WriteAsJsonAsync(response);
+}));
 app.UseRouting();
 
 app.UseCors(myCors);

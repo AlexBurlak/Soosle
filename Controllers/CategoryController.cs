@@ -27,5 +27,18 @@ namespace Soosle.Controllers
         {
             return Ok(await _mediator.Send(new GetAllCategoriesQuery()));
         }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> Update(UpdateCategoryCommand request)
+        {
+            return Ok(await _mediator.Send(request));
+        }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete(DeleteCategoryCommand request)
+        {
+            await _mediator.Send(request);
+            return NoContent();
+        }
     }
 }

@@ -1,8 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Category } from 'src/app/models/entities/category';
 import { CategoryCreateRequest } from 'src/app/models/requests/category-create-request';
+import { CategoryAddTableService } from 'src/app/services/category-add-table.service';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -15,7 +17,8 @@ export class AddComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   constructor(private builder: FormBuilder,
-    private categoryService: CategoryService) { 
+    private categoryService: CategoryService,
+    private categoryAddTableService: CategoryAddTableService) { 
     this.form = builder.group({
       'name': ['', Validators.required]
     });
@@ -33,7 +36,8 @@ export class AddComponent implements OnInit, OnDestroy {
     this.categoryService.add(new CategoryCreateRequest({name: this.f.name.value}))
       .pipe(takeUntil(this.subscriptions))
       .subscribe(categoryId => {
-
+        this.categoryAddTableService.updateCategory(new Category({id:categoryId, name:this.f.name.value }));
+        this.f.name.reset();
       })
   }
 

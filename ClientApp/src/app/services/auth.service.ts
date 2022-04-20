@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { LoginResponse } from '../models/responses/login-response';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class AuthService {
   public currentToken: Observable<string | null>;
   private logged: boolean = false;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient,
+    private router: Router) { 
     this.currentTokenSubject = new BehaviorSubject<string | null>(localStorage.getItem('token'));
     this.currentToken = this.currentTokenSubject.asObservable();
     this.url = environment.url + '/Account';
@@ -22,6 +24,12 @@ export class AuthService {
 
   getToken() : string | null {
     return localStorage.getItem('token');
+  }
+
+  clearStorage(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('token-expiration');
+    this.currentTokenSubject.next(null);
   }
 
   login(login: string, password: string) {
@@ -34,4 +42,9 @@ export class AuthService {
         return response;
       }))
   } 
+
+  logout(): void {
+    this.clearStorage();
+    this.router.navigate(['/auth']);
+  }
 }
